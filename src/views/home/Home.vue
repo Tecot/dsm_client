@@ -116,6 +116,7 @@ export default {
         'Content-Type': 'application/json; charset=utf-8' 
       }
     }).then((response) => {
+      console.log(response.data.data)
       this.srpDirNames = response.data.data
     })
   },

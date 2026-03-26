@@ -18,7 +18,8 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-	target: 'http://127.0.0.1:8173/',
+	      target: 'http://127.0.0.1:8173/',
+        // target: 'https://mmdapi.deepomics.org/',
         changeOrigin: true, 
         pathRewrite: {
           '^/api': ''
