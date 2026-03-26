@@ -87,7 +87,9 @@ export default {
       axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.tableData = response.data.data
       })

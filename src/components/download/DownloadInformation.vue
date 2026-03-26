@@ -58,7 +58,9 @@ export default {
       return axios.get(url, {
         headers: {
             'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.tableData = response.data.data
       }).finally(() => {
@@ -70,6 +72,8 @@ export default {
       try {
         const response = await axios({
           url: config.baseUrl + config.uri.downloadURI + '/' + srp,
+          timeout: 300000,
+          withCredentials: false,
           method: 'GET',
           responseType: 'blob', // 关键：指定响应类型为二进制
         });

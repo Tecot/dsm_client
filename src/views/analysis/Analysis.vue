@@ -81,7 +81,9 @@ export default {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8' 
-                }
+                },
+                timeout: 300000,
+                withCredentials: false
             }).then((response) => {
                 this.analysis_methods = response.data.data
                 console.log(this.analysis_methods)
@@ -101,6 +103,8 @@ export default {
             return axios({
                 url: url,
                 method: 'GET',
+                timeout: 300000,
+                withCredentials: false,
                 responseType: 'blob'
             }).then((response) => {
                 this.blobDownload(response)
@@ -175,7 +179,9 @@ export default {
                 axios.post(url, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
-                    }
+                    },
+                    timeout: 300000,
+                    withCredentials: false
                 })
                 .then((response) => {
                     console.log(response.data)

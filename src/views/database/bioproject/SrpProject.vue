@@ -91,7 +91,9 @@ export default {
         },
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.searchedSrptableData = response.data.data
       }).finally(() => {

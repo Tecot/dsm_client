@@ -179,7 +179,9 @@ export default {
       await axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.geoData = response.data.data
         this.gradientData = this.processGradientData(this.geoData)

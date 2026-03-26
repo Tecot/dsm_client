@@ -133,7 +133,9 @@ export default {
       axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         const newData = {}
         newData['length'] = response.data.length
@@ -182,7 +184,9 @@ export default {
       axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => { 
         this.proteinStruckData = response.data.data? response.data.data : ''
       })
@@ -195,7 +199,9 @@ export default {
       axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.proteinSeqInfo = response.data.data? response.data.data : {}
       })

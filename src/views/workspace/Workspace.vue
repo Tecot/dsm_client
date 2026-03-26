@@ -123,7 +123,9 @@ export default {
         axios.get(config.baseUrl + config.uri.taskStatuesViewURI + '/' + keys.join('$'), {
           headers: {
             'Content-Type': 'application/json; charset=utf-8'
-          }
+          },
+          timeout: 300000,
+          withCredentials: false
         }).then((response) => {
           const data = response.data.data
           const ptasks = []
@@ -214,6 +216,8 @@ export default {
       return axios({
         url: url,
         method: 'GET',
+        timeout: 300000,
+        withCredentials: false,
         responseType: 'blob'
       }).then((response) => {
         this.blobDownload(response, id)

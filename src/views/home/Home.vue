@@ -111,17 +111,36 @@ export default {
 
   mounted() {
     window.addEventListener('scroll', this.handleScroll)
-    axios.get(config.baseUrl + config.uri.srpDirNamesViewURI, {
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8' 
-      }
-    }).then((response) => {
-      console.log(response.data.data)
-      this.srpDirNames = response.data.data
-    })
+    const sraNameList = this.$store.state.sraNameList
+    if(sraNameList.length > 0) {
+      this.srpDirNames = sraNameList
+    } else {
+      this.requestSraNameList()
+    }
+    // axios.get(config.baseUrl + config.uri.srpDirNamesViewURI, {
+    //   headers: {
+    //     'Content-Type': 'application/json; charset=utf-8' 
+    //   },
+    //   timeout: 300000,
+    //   withCredentials: false
+    // }).then((response) => {
+    //   this.srpDirNames = response.data.data
+    // })
   },
 
   methods: {
+    async requestSraNameList() {
+      await axios.get(config.baseUrl + config.uri.srpDirNamesViewURI, {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8' 
+        },
+        timeout: 300000,
+        withCredentials: false
+      }).then((response) => {
+        this.srpDirNames = response.data.data
+        this.$store.dispatch('setSraNameList', response.data.data)
+      })
+    },
     handleScroll() {
       window.scrollY > 400? this.isShow = false: this.isShow = true
     },
@@ -136,7 +155,9 @@ export default {
           axios.get(config.baseUrl + config.uri.getTargetSrpValueURI + '/' + this.searchData, {
             headers: {
               'Content-Type': 'application/json; charset=utf-8' 
-            }
+            },
+            timeout: 300000,
+            withCredentials: false
           }).then((response) => {
             this.$router.push({
               name: 'runproject', 

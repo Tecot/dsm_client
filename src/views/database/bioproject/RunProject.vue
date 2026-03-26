@@ -90,7 +90,9 @@ export default {
       axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.runInfo = response.data
         this.$store.dispatch('setDatabaseRunProjectData', {

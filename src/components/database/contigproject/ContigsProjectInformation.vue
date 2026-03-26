@@ -139,6 +139,8 @@ export default {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
         },
+        timeout: 300000,
+        withCredentials: false,
         params: {
           ...searchConditions
         }
@@ -160,7 +162,9 @@ export default {
       return axios.get(url, {
         headers: {
           'Content-Type': 'application/json; charset=utf-8' 
-        }
+        },
+        timeout: 300000,
+        withCredentials: false
       }).then((response) => {
         this.header = response.data.header
         this.tableData = response.data.data

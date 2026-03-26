@@ -13,6 +13,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    sraNameList: [],
     geoInfoData: '',
     databaseRunProjectData: '',
     contigDetailData: '',
@@ -23,6 +24,9 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    SET_SRA_NAME_LIST(state, payload) {
+      state.sraNameList = payload
+    },
     SET_GEO_INFO_DATA(state, payload) {
       state.geoInfoData = payload
     },
@@ -38,6 +42,9 @@ export default new Vuex.Store({
   },
 
   actions: {
+    setSraNameList(context, payload) {
+      context.commit('SET_SRA_NAME_LIST', payload)
+    },
     setGeoInfoData(context, payload) {
       context.commit('SET_GEO_INFO_DATA', payload)
     },
