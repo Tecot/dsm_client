@@ -1,0 +1,6 @@
+config.js
+baseUrl: 'https://mmdapi.deepomics.org/'
+
+
+
+vue-cli-service serve --port 8172
