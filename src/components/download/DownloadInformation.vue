@@ -49,7 +49,12 @@ export default {
   },
 
   mounted() {
-    this.requestDownloadListInfo()
+    const downloadList = this.$store.state.downloadFiles
+    if(downloadList.length > 0 ) {
+      this.tableData = downloadList
+    } else {
+      this.requestDownloadListInfo()
+    }
   },
 
   methods: {
@@ -58,19 +63,22 @@ export default {
       const url = config.baseUrl + config.uri.downloadListViewURI
       return axios.get(url, {
         headers: {
-            'Content-Type': 'application/json; charset=utf-8' 
+          'Content-Type': 'application/json; charset=utf-8' 
         },
         timeout: 300000,
         withCredentials: false
       }).then((response) => {
-        const result = response.data.data
-        result.forEach(item => {
-          this.tableData.push({
+        const temp = []
+        console
+        response.data.data.forEach(item => {
+          temp.push({
             file: item.file,
             size: item.size,
             url: config.baseUrl + config.uri.downloadURI + '/' + item.file
           })
         })
+        this.$store.dispatch('setDownloadFiles', temp)
+        this.tableData = temp
       }).finally(() => {
         hideLoading()
       })

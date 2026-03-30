@@ -18,6 +18,7 @@ export default new Vuex.Store({
     databaseRunProjectData: '',
     contigDetailData: '',
     ifShowedPrivacyPolicy: false,
+    downloadFiles: [],
   },
 
   getters: {
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     },
     SET_IF_SHOWED_PRIVACY_POLICY(state, payload) {
       state.ifShowedPrivacyPolicy = payload
+    },
+    SET_DOWNLOAD_FILES(state, payload) {
+      state.downloadFiles = payload
     }
   },
 
@@ -56,6 +60,9 @@ export default new Vuex.Store({
     },
     setIfShowedPrivacyPolicy(context, payload) {
       context.commit('SET_IF_SHOWED_PRIVACY_POLICY', payload)
+    },
+    setDownloadFiles(context, payload) {
+      context.commit('SET_DOWNLOAD_FILES', payload)
     }
   },
 
