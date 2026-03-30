@@ -10,14 +10,15 @@
         :header-cell-style="headerCellStyle"
         :cell-style="cellStyle"
         size="small"
-        max-height="600"
         style="width: 100%"
       >
         <el-table-column prop="file" label="SRA project"></el-table-column>
-        
+        <el-table-column prop="size" label="Size"></el-table-column>
         <el-table-column label="Download">
           <template slot-scope="scope">
-            <el-button size="large" @click="handleDownload(scope.row)" icon="el-icon-download" style="border: none;"></el-button>
+            <a :href="scope.row.url" class="download-btn">
+              <i  class="el-icon-download" style="font-size: 20px; color: #1890ff;"></i>
+            </a>
           </template>
         </el-table-column>
       </el-table>
@@ -62,7 +63,14 @@ export default {
         timeout: 300000,
         withCredentials: false
       }).then((response) => {
-        this.tableData = response.data.data
+        const result = response.data.data
+        result.forEach(item => {
+          this.tableData.push({
+            file: item.file,
+            size: item.size,
+            url: config.baseUrl + config.uri.downloadURI + '/' + item.file
+          })
+        })
       }).finally(() => {
         hideLoading()
       })
@@ -70,25 +78,23 @@ export default {
 
     async requestDownload(srp) {
       try {
-        const response = await axios({
+        await axios({
           url: config.baseUrl + config.uri.downloadURI + '/' + srp,
-          timeout: 300000,
-          withCredentials: false,
           method: 'GET',
-          responseType: 'blob', // 关键：指定响应类型为二进制
+          timeout: 300000,
+          method: 'GET',
+          responseType: 'blob',
         });
 
-        // 创建下载链接
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', srp); // 设置文件名
-        document.body.appendChild(link);
-        link.click();
-        
-        // 清理资源
-        link.remove();
-        window.URL.revokeObjectURL(url);
+        const blob = new Blob([res.data], { type: 'application/zip' })
+        const downloadUrl = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = downloadUrl
+        a.download = srp
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(downloadUrl)
       } catch (error) {
         this.$notify({
           title: 'Error',
