@@ -1,10 +1,10 @@
 <template>
   <div class='svg-container'>
-		<svg :width='width' :height='height' fill="#2C3964" style="border-radius: 150px 150px 150px 150px;" @mousemove='listener($event)'>
-			<a :href="tag.href" v-for='(tag, index) in tags' :key="index">
-				<text :x='tag.x' :y='tag.y' :fill="fontColor" :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)'>{{tag.text}}</text>
-			</a>
-		</svg>
+	<svg :width='width' :height='height' fill="#2C3964" style="border-radius: 150px 150px 150px 150px;" @mousemove='listener($event)'>
+		<a :href="tag.href" v-for='(tag, index) in tags' :key="index">
+			<text :x='tag.x' :y='tag.y' :fill="fontColor" :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)'>{{tag.text}}</text>
+		</a>
+	</svg>
   </div>
 </template>
 

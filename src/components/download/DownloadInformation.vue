@@ -1,12 +1,14 @@
 <template>
   <div class="download-container">
     <div class="title-container">
-      <p>The following datasets are available for download, including VFGs (Virulence Factors), ARGs (Antibiotic Resistance Genes), taxonomic annotations, AMP (Antimicrobial Peptide) results, BGCs (Biosynthetic Gene Clusters) results, and protein structures.</p>
-      <p><strong><i>Note</i></strong>: Protein structure files are stored in compressed archives named using the format: Bioproject_ID_Quantity.</p>
+      <el-card>
+        <p>The following datasets are available for download, including VFGs (Virulence Factors), ARGs (Antibiotic Resistance Genes), taxonomic annotations, AMP (Antimicrobial Peptide) results, BGCs (Biosynthetic Gene Clusters) results, and protein structures.</p>
+        <p><strong><i>Note</i></strong>: Protein structure files are stored in compressed archives named using the format: Bioproject_ID_Quantity.</p>
+      </el-card>
     </div>
     
     <div class="table-container">
-      <div class="table_up">
+      <el-card class="table_up">
         <el-table
           :data="tableData.analysis"
           :header-cell-style="headerCellStyle"
@@ -24,9 +26,9 @@
             </template>
           </el-table-column>
         </el-table>
-      </div>
+      </el-card>
 
-      <div class="table-down">
+      <el-card class="table-down">
         <el-table
           :data="tableData.datasets"
           :header-cell-style="headerCellStyle"
@@ -44,7 +46,7 @@
             </template>
           </el-table-column>
         </el-table>
-      </div>
+      </el-card>
     </div>
   </div>
 </template>
@@ -62,10 +64,12 @@ export default {
       headerCellStyle: {
         textAlign: 'center', 
         backgroundColor: '#324277', 
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        fontSize: '18px'
       },
       cellStyle: {
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: '16px'
       },
       tableData: [],
     };
@@ -175,12 +179,12 @@ export default {
   padding: 20px 20% 20px 20%;
 
   .title-container {
-    font-size: 18px;
-    font-weight: 700;
-    color: #36A3F7;
-    border-radius: 5px 5px 0 0;
-    background-color: #FFF;
-    padding-left: 10px;
+    .el-card {
+      font-size: 18px;
+      font-weight: 700;
+      color: #36A3F7;
+    }
+    
   }
 
 
@@ -188,7 +192,7 @@ export default {
     margin-top: 20px;
 
     .table_up {
-      margin-bottom: 60px;
+      margin-bottom: 20px;
     }
   }
 }

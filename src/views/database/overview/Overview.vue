@@ -1,5 +1,5 @@
 <template>
-  <div class="overview-container">
+  <div class="overview-container" v-show="show">
     <!-- <dv-decoration-7 style="width:100%;height:40px; color: #FFFFFF;font-size: 24px; display: flex; ">
       <dv-decoration-4 :reverse="true" style="width:100px;height:5px; color: #7ACAEC;" />
         Distribution and statistics of deep-sea microbial data
@@ -9,66 +9,59 @@
       <div class="left">
         <div class="statistics">
           <div class="row">
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Metagenome</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #F76B6B;  text-align: center;margin-top: 10px; ">164</div>
+            <div class="item">
+              <div class="title">Metagenome</div>
+              <div class="num" style="color: #C0676C;">164</div>
             </div>
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Taxonomy</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #73C0DE;  text-align: center;margin-top: 10px; ">3,370</div>
+            <div class="item">
+              <div class="title">Taxonomy</div>
+              <div class="num" style="color: #73A3C2;">3,370</div>
             </div>
           </div>
-
           <div class="row">
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">ARGS</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #FCD05B;  text-align: center;margin-top: 10px; ">508</div>
+            <div class="item">
+              <div class="title">ARGS</div>
+              <div class="num" style="color: #CBB16C;">508</div>
             </div>
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">VFs</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #409AF7;  text-align: center;margin-top: 10px; ">13,718</div>
+            <div class="item">
+              <div class="title">VFs</div>
+              <div class="num" style="color: #5085D3;">13,718</div>
             </div>
           </div>
-
           <div class="row">
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Second Metabilites</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #5FE073;  text-align: center;margin-top: 10px; ">10,963</div>
+            <div class="item">
+              <div class="title">Second Metabilites</div>
+              <div class="num" style="color: #72BC79;">10,963</div>
             </div>
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">AMPs</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #CB62E0;  text-align: center;margin-top: 10px; ">342,906</div>
+            <div class="item">
+              <div class="title">AMPs</div>
+              <div class="num" style="color: #C434A0;">342,906</div>
             </div>
           </div>
-
           <div class="row">
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Secondary Metabolites</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #FF00B4;  text-align: center;margin-top: 10px; ">10,994,552</div>
+            <div class="item">
+              <div class="title">Secondary Metabolites</div>
+              <div class="num" style="color: #24EDB7;">10,994,552</div>
+            </div>
+            <div class="item">
+              <div class="title">Protein Structure</div>
+              <div class="num" style="color: #A15EC1;">233,245</div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Protein Structure</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #00FF74;  text-align: center;margin-top: 10px; ">233,245</div>
-            </div>
-            <!-- <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">IMG/VR</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #8355E8;  text-align: center;margin-top: 10px; ">178765</div>
-            </div> -->
-          </div>
-
-          <div style="margin-left: 20px; margin-right: 20px;">
+          <div style="margin: 20px 20px auto 20px;">
             <el-button type="primary" style="width: 100%;" @click="handleGoToDownload()">Download Database</el-button>
           </div>
-          
         </div>
       </div>
+
       <div class="right">
-        <GeoWithSearch :geoData="geoData"></GeoWithSearch>
+        <GeoWithSearch :geoData="geoData" :geoHeight="'500px'"></GeoWithSearch>
       </div>
     </div>
+
+
+
+
     <div class="down">
       <div class="box">
         <div class="name border_1">
@@ -147,7 +140,8 @@ export default {
 			argsWordCloudData: [],
 			productWordCloudData: [],
       taxonomeWordCloudData: [],
-      ampsWordCloudData: []
+      ampsWordCloudData: [],
+      show: false
     }
   },
 
@@ -162,6 +156,7 @@ export default {
 			this.productWordCloudData = geoDataInfoStore.productWordCloudData
       this.taxonomeWordCloudData = geoDataInfoStore.taxonomeWordCloudData
       this.ampsWordCloudData = geoDataInfoStore.ampsWordCloudData
+      this.show = geoDataInfoStore.ifShow
     } else {
       this.requestGeoData()
     }
@@ -186,6 +181,7 @@ export default {
 				this.productWordCloudData = this.processProductData(this.geoData)
         this.taxonomeWordCloudData = this.processTaxonomeWordCloudData(this.geoData)
         this.ampsWordCloudData = this.processAmpsWordCloudData(this.geoData)
+        this.show = true
         this.$store.dispatch('setGeoInfoData', {
           geoData: this.geoData,
           gradientData: this.gradientData,
@@ -194,7 +190,8 @@ export default {
 					argsWordCloudData: this.argsWordCloudData,
 					productWordCloudData: this.productWordCloudData,
           taxonomeWordCloudData: this.taxonomeWordCloudData,
-          ampsWordCloudData: this.ampsWordCloudData
+          ampsWordCloudData: this.ampsWordCloudData,
+          ifShow: this.show
         })
       }).finally(() => {
         hideLoading()
@@ -365,14 +362,31 @@ export default {
       width: 360px;
       padding: 10px 10px 0 10px;
       .statistics {
-        background-color: #3a4569;
-        opacity: 0.8;
+        // background-color: #3a4569;
+        background: rgba(58, 69, 105, 0.8);
         height: 100%;
         border-radius: 10px 10px 10px 10px;
         .row {
           display: flex;
           justify-content: space-around;
           padding: 10px 10px 10px 10px;
+          margin-top: 10px;
+          .item {
+            width: 100px;
+            .title {
+              font-weight: 700;
+              font-size: 18px; 
+              color: #FFF; 
+              text-align: center; 
+            }
+            .num {
+              font-weight: 700;
+              font-size: 24px; 
+              color: #409AF7;  
+              text-align: center;
+              margin-top: 10px;
+            }
+          }
         }
       }
     }
@@ -384,8 +398,12 @@ export default {
     display: flex;
     justify-content: space-around;
     background-color: #2C3964;
+    margin-top: 40px;
     .box {
-      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       .name {
         height: 40px;
         width: 95%;
