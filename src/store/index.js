@@ -18,7 +18,7 @@ export default new Vuex.Store({
     databaseRunProjectData: '',
     contigDetailData: '',
     ifShowedPrivacyPolicy: false,
-    downloadFiles: [],
+    downloadFiles: null,
   },
 
   getters: {

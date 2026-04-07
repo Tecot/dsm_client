@@ -7,11 +7,6 @@
 -->
 <template>
   <div class="download-container">
-    <!-- <div class="download-source">
-      <DownloadDatabaseInformation></DownloadDatabaseInformation>
-    </div> -->
-    
-
     <div class="download-source">
       <DownloadInformation></DownloadInformation>
     </div>

@@ -1,20 +1,20 @@
 <template>
-  <div class="overview-container" :style="{height: bodyHeight + 'px'}">
+  <div class="overview-container">
     <!-- <dv-decoration-7 style="width:100%;height:40px; color: #FFFFFF;font-size: 24px; display: flex; ">
       <dv-decoration-4 :reverse="true" style="width:100px;height:5px; color: #7ACAEC;" />
         Distribution and statistics of deep-sea microbial data
       <dv-decoration-4 :reverse="true" style="width:100px;height:5px;" />
     </dv-decoration-7> -->
-    <div class="up" :style="{height: upHeight + 'px'}">
+    <div class="up">
       <div class="left">
-        <div class="statistics" :style="{height: (upHeight - 20) + 'px'}">
+        <div class="statistics">
           <div class="row">
             <div class="item" style="width: 100px;">
               <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Metagenome</div>
               <div class="num" style="font-weight: 700;font-size: 16px; color: #F76B6B;  text-align: center;margin-top: 10px; ">164</div>
             </div>
             <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">taxonomy</div>
+              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Taxonomy</div>
               <div class="num" style="font-weight: 700;font-size: 16px; color: #73C0DE;  text-align: center;margin-top: 10px; ">3,370</div>
             </div>
           </div>
@@ -32,38 +32,44 @@
 
           <div class="row">
             <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Second M</div>
+              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Second Metabilites</div>
               <div class="num" style="font-weight: 700;font-size: 16px; color: #5FE073;  text-align: center;margin-top: 10px; ">10,963</div>
             </div>
             <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Protein S</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #CB62E0;  text-align: center;margin-top: 10px; ">10,994,552</div>
+              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">AMPs</div>
+              <div class="num" style="font-weight: 700;font-size: 16px; color: #CB62E0;  text-align: center;margin-top: 10px; ">342,906</div>
             </div>
           </div>
 
           <div class="row">
             <div class="item" style="width: 100px;">
               <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Secondary Metabolites</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #FF00B4;  text-align: center;margin-top: 10px; ">15,755</div>
-            </div>
-            <div class="item" style="width: 100px;">
-              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">AMPs</div>
-              <div class="num" style="font-weight: 700;font-size: 16px; color: #FFFB00;  text-align: center;margin-top: 10px; ">234,233</div>
+              <div class="num" style="font-weight: 700;font-size: 16px; color: #FF00B4;  text-align: center;margin-top: 10px; ">10,994,552</div>
             </div>
           </div>
 
-          <div style="margin: 0 20px 20px 20px;">
+          <div class="row">
+            <div class="item" style="width: 100px;">
+              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">Protein Structure</div>
+              <div class="num" style="font-weight: 700;font-size: 16px; color: #00FF74;  text-align: center;margin-top: 10px; ">233,245</div>
+            </div>
+            <!-- <div class="item" style="width: 100px;">
+              <div class="title" style="font-weight: 700;font-size: 18px; color: #FFF; text-align: center; ">IMG/VR</div>
+              <div class="num" style="font-weight: 700;font-size: 16px; color: #8355E8;  text-align: center;margin-top: 10px; ">178765</div>
+            </div> -->
+          </div>
+
+          <div style="margin-left: 20px; margin-right: 20px;">
             <el-button type="primary" style="width: 100%;" @click="handleGoToDownload()">Download Database</el-button>
           </div>
           
         </div>
       </div>
       <div class="right">
-        <GeoWithSearch :geoData="geoData" :geoHeight="upHeight + 'px'"></GeoWithSearch>
+        <GeoWithSearch :geoData="geoData"></GeoWithSearch>
       </div>
     </div>
-
-    <div class="down" :style="{height: downHeight + 'px'}">
+    <div class="down">
       <div class="box">
         <div class="name border_1">
           Statistical of Samples from Various Regions
@@ -94,6 +100,18 @@
         </div>
         <WordCloudVis :words="argsWordCloudData"></WordCloudVis>
       </div>
+      <div class="box">
+        <div class="name border_3" style="margin-bottom: 30px;">
+          Secondary Metabolites
+        </div>
+        <WordCloudVis :words="productWordCloudData" :fontColor="'#5AD86A'"></WordCloudVis>
+      </div>
+      <div class="box">
+        <div class="name border_3" style="margin-bottom: 30px;">
+          AMPs
+        </div>
+        <WordCloudVis :words="ampsWordCloudData" :fontColor="'#5AD86A'"></WordCloudVis>
+      </div>
     </div>
     
   </div>
@@ -122,9 +140,6 @@ export default {
 
   data() {
     return {
-      bodyHeight: 0,
-      upHeight: 0,
-      downHeight: 0,
       geoData: [],
       gradientData: [],
       positionBarData: {},
@@ -137,9 +152,6 @@ export default {
   },
 
   mounted() {
-    this.bodyHeight = window.innerHeight - 80
-    this.upHeight = this.bodyHeight * 0.6
-    this.downHeight = this.bodyHeight * 0.4
     const geoDataInfoStore = this.$store.state.geoInfoData
     if(geoDataInfoStore) {
       this.geoData = geoDataInfoStore.geoData
@@ -191,38 +203,45 @@ export default {
 
     processProductData(objData=[]) {
       let arr = []
-      objData.forEach(item => {
-        if(item.info.product) {
-			const productArr = item.info.product.split(';')
-			arr = [...arr, ...productArr]
+      for(let i = 0; i < objData.length; i++) {
+        if(objData[i].info.product) {
+          const productArr = objData[i].info.product.split(';')
+          arr = [...arr, ...productArr]
+          if(Array.from(new Set(arr)).length > 20) {
+            return Array.from(new Set(arr)).splice(0, 20)
+          }
         }
-      })
-      const products = Array.from(new Set(arr)).splice(1, 20)
-      return products
+        
+      }
+      return Array.from(new Set(arr))
     },
 
     processArgsData(objData=[]) {
       let arr = []
-      objData.forEach(item => {
-        if(item.info.args) {
-          const argsArr = item.info.args.split(';')
+      for(let i = 0; i < objData.length; i++) {
+        if(objData[i].info.product) {
+          const argsArr = objData[i].info.args.split(';')
           arr = [...arr, ...argsArr]
+          if(Array.from(new Set(arr)).length > 20) {
+            return Array.from(new Set(arr)).splice(0, 20)
+          }
         }
-      })
-      const args = Array.from(new Set(arr)).splice(1, 20)
-      return args
+      }
+      return Array.from(new Set(arr))
     },
 
     processVFsData(objData=[]) {
       let arr = []
-      objData.forEach(item => {
-        if(item.info.vfs) {
-          const vfArr = item.info.vfs.split(';')
-          arr = [...arr, ...vfArr]
+      for(let i = 0; i < objData.length; i++) {
+        if(objData[i].info.product) {
+          const vfsArr = objData[i].info.vfs.split(';')
+          arr = [...arr, ...vfsArr]
+          if(Array.from(new Set(arr)).length > 20) {
+            return Array.from(new Set(arr)).splice(0, 20)
+          }
         }
-      })
-      const vfs = Array.from(new Set(arr)).splice(1, 20)
-      return vfs
+      }
+      return Array.from(new Set(arr))
     },
 
     processPositionBarData(objData = []) {
@@ -258,6 +277,10 @@ export default {
         '8000~10000': { value: 0, name: '8000~10000' },
         '10000~12000': { value: 0, name: '10000~12000' }
       }
+      const data = {
+        maxValue: 0,
+        data: [],
+      }
       objData.forEach((item) => {
         if(item.depth === '-') {
           meta['Unknow'].value++
@@ -290,27 +313,30 @@ export default {
     },
 
     processTaxonomeWordCloudData(objData = []) {
-      let tempArr = []
-      objData.forEach(item => {
-        if(item.info.taxonome) {
-          const strs = item.info.taxonome.replace(/s__/g, '').split(';')
-          tempArr = [...tempArr, ...strs]
+      let arr = []
+      for(let i = 0; i < objData.length; i++) {
+        if(objData[i].info.product) {
+          const taxonomesArr = objData[i].info.taxonome.replace(/s__/g, '').split(';')
+          arr = [...arr, ...taxonomesArr]
+          if(Array.from(new Set(arr)).length > 20) {
+            return Array.from(new Set(arr)).splice(0, 20)
+          }
         }
-      })
-      const setArr = [...new Set(tempArr)].splice(1, 20)
-      return setArr
+      }
+      return Array.from(new Set(arr))
     },
 
     processAmpsWordCloudData(objData = []) {
-      let tempArr = []
-      objData.forEach(item => {
-        if(item.info.amps && item.info.amps !== '-') {
-          const strs = item.info.amps.split(';')
-          tempArr = [...tempArr, ...strs]
-        }
-      })
-      const setArr = [...new Set(tempArr)].splice(1, 20)
-      return setArr
+      // let tempArr = []
+      // objData.forEach(item => {
+      //   if(item.info.amps && item.info.amps !== '-') {
+      //     const strs = item.info.amps.split(';')
+      //     tempArr = [...tempArr, ...strs]
+      //   }
+      // })
+      // const setArr = [...new Set(tempArr)].splice(1, 20)
+      // return setArr
+      return ['ALP','ADP','CDP','CLP','ALP','ADP','CDP','CLP','ALP','ADP','CDP','CLP','ALP','ADP','CDP','CLP','ALP','ADP','CDP','CLP']
     },
 
     goToLink(value) {
@@ -331,6 +357,7 @@ export default {
 <style lang="scss" scoped>
 .overview-container {
   background-color: #2C3964;
+  height: calc(100vh - 80px);
   .up {
     display: flex;
     background-color: #2C3964;
@@ -340,6 +367,7 @@ export default {
       .statistics {
         background-color: #3a4569;
         opacity: 0.8;
+        height: 100%;
         border-radius: 10px 10px 10px 10px;
         .row {
           display: flex;
@@ -349,7 +377,7 @@ export default {
       }
     }
     .right {
-      width: calc(100% - 360px);
+      width: 100%;
     }
   }
   .down {

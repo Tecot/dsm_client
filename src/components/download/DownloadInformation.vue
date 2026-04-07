@@ -1,27 +1,50 @@
 <template>
   <div class="download-container">
     <div class="title-container">
-      <span>Download SRA project</span>
+      <p>The following datasets are available for download, including VFGs (Virulence Factors), ARGs (Antibiotic Resistance Genes), taxonomic annotations, AMP (Antimicrobial Peptide) results, BGCs (Biosynthetic Gene Clusters) results, and protein structures.</p>
+      <p><strong><i>Note</i></strong>: Protein structure files are stored in compressed archives named using the format: Bioproject_ID_Quantity.</p>
     </div>
     
     <div class="table-container">
-      <el-table
-        :data="tableData"
-        :header-cell-style="headerCellStyle"
-        :cell-style="cellStyle"
-        size="small"
-        style="width: 100%"
-      >
-        <el-table-column prop="file" label="SRA project"></el-table-column>
-        <el-table-column prop="size" label="Size"></el-table-column>
-        <el-table-column label="Download">
-          <template slot-scope="scope">
-            <a :href="scope.row.url" class="download-btn">
-              <i  class="el-icon-download" style="font-size: 20px; color: #1890ff;"></i>
-            </a>
-          </template>
-        </el-table-column>
-      </el-table>
+      <div class="table_up">
+        <el-table
+          :data="tableData.analysis"
+          :header-cell-style="headerCellStyle"
+          :cell-style="cellStyle"
+          size="small"
+          style="width: 100%"
+        >
+          <el-table-column prop="file" label="Dataset"></el-table-column>
+          <el-table-column prop="size" label="Size"></el-table-column>
+          <el-table-column label="Download">
+            <template slot-scope="scope">
+              <a :href="scope.row.url" class="download-btn">
+                <i  class="el-icon-download" style="font-size: 20px; color: #1890ff;"></i>
+              </a>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <div class="table-down">
+        <el-table
+          :data="tableData.datasets"
+          :header-cell-style="headerCellStyle"
+          :cell-style="cellStyle"
+          size="small"
+          style="width: 100%"
+        >
+          <el-table-column prop="file" label="Dataset"></el-table-column>
+          <el-table-column prop="size" label="Size"></el-table-column>
+          <el-table-column label="Download">
+            <template slot-scope="scope">
+              <a :href="scope.row.url" class="download-btn">
+                <i  class="el-icon-download" style="font-size: 20px; color: #1890ff;"></i>
+              </a>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
@@ -32,14 +55,14 @@ import config from '@/config'
 import { showLoading, hideLoading } from '@/utils/loading'
 
 export default {
-  name: 'BioProject',
+  name: 'DownloadInformation',
 
   data() {
     return {
       headerCellStyle: {
         textAlign: 'center', 
-        backgroundColor: '#E9ECEF', 
-        color: '#44546A'
+        backgroundColor: '#324277', 
+        color: '#FFFFFF'
       },
       cellStyle: {
         textAlign: 'center'
@@ -50,7 +73,7 @@ export default {
 
   mounted() {
     const downloadList = this.$store.state.downloadFiles
-    if(downloadList.length > 0 ) {
+    if(downloadList) {
       this.tableData = downloadList
     } else {
       this.requestDownloadListInfo()
@@ -68,17 +91,31 @@ export default {
         timeout: 300000,
         withCredentials: false
       }).then((response) => {
-        const temp = []
-        console
+        const datasets = []
+        const analysis = []
         response.data.data.forEach(item => {
-          temp.push({
-            file: item.file,
-            size: item.size,
-            url: config.baseUrl + config.uri.downloadURI + '/' + item.file
-          })
+          if(['BGCs.zip', 'AMPs.zip', 'vf_res.zip', 'taxnome.zip'].includes(item.file)) {
+            analysis.push({
+              file: item.file,
+              size: item.size,
+              url: config.baseUrl + config.uri.downloadURI + '/' + item.file
+            })
+          } else {
+            datasets.push({
+              file: item.file,
+              size: item.size,
+              url: config.baseUrl + config.uri.downloadURI + '/' + item.file
+            })
+          }
         })
-        this.$store.dispatch('setDownloadFiles', temp)
-        this.tableData = temp
+        this.$store.dispatch('setDownloadFiles', {
+          datasets: datasets,
+          analysis: analysis
+        })
+        this.tableData = {
+          datasets: datasets,
+          analysis: analysis
+        }
       }).finally(() => {
         hideLoading()
       })
@@ -135,27 +172,24 @@ export default {
 
 <style lang="scss"scoped>
 .download-container {
-padding-left: 40px;
-padding-right: 40px;
+  padding: 20px 20% 20px 20%;
 
-.title-container {
-  line-height: 60px;
-  height: 60px;
-  font-size: 18px;
-  font-weight: 700;
-  color: #36A3F7;
-  border-radius: 5px 5px 0 0;
-  background-color: #FFF;
-  padding-left: 10px;
-}
+  .title-container {
+    font-size: 18px;
+    font-weight: 700;
+    color: #36A3F7;
+    border-radius: 5px 5px 0 0;
+    background-color: #FFF;
+    padding-left: 10px;
+  }
 
 
-.pagination-container {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: #FFF;
-}
+  .table-container {
+    margin-top: 20px;
+
+    .table_up {
+      margin-bottom: 60px;
+    }
+  }
 }
 </style>
