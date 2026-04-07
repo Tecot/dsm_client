@@ -29,8 +29,8 @@ export default {
 
   data() {
     return {
-			width:250,//svg宽度
-			height:250,//svg高度
+			width:300,//svg宽度
+			height:300,//svg高度
 			RADIUS:200,//球的半径
 			speedX:Math.PI/360,//球一帧绕x轴旋转的角度
 			speedY:Math.PI/360,//球-帧绕y轴旋转的角度

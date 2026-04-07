@@ -16,7 +16,7 @@
         it will be deemed that you agree to the use of cookies.
       </span>
       <div class="aDiv">
-        <a href="##" style="margin-left:2.16em;" @click="closeDiv">I agree</a>
+        <a href="##" style="margin-left:2.16em;" @click="confirmedAgree">I agree</a>
       </div>
     </div>
     <el-dialog
@@ -170,7 +170,6 @@ export default {
     }
   },
   mounted() {
-    
     if(!this.$store.state.showPrivacyPolicy) {
       this.cookieDivOr = true
       this.setIfShowedPrivacyPolicy(true)
@@ -180,7 +179,7 @@ export default {
     ...mapActions([
       'setIfShowedPrivacyPolicy'
     ]),
-    closeDiv() {
+    confirmedAgree() {
       this.cookieDivOr = false
     },
     viewPrivacyPolicy() {

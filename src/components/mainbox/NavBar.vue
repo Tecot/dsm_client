@@ -32,30 +32,30 @@
       router
     >
       <el-menu-item index="/index">
-        Home
+        HOME
       </el-menu-item>
       <el-menu-item index="/workspace">
-        Workspace
+        WORKSPACE
       </el-menu-item>
       <el-menu-item index="/analysis">
-        Analysis
+        ANALYSIS
       </el-menu-item>
       <el-submenu index="/database">
         <template slot="title">
-          Database
+          DATABASE
         </template>
         <el-menu-item index="/database/overview">
-          Overview
+          OVERVIEW
         </el-menu-item>
         <el-menu-item index="/database/srpproject">
-          SRP Projects
+          SRP PROJECTS
         </el-menu-item>
         <el-menu-item index="/database/contigproject">
-          Contig List
+          CONTIG LIST
         </el-menu-item>
       </el-submenu>
       <el-menu-item index="/download">
-        Download
+        DOWNLOAD
       </el-menu-item>
       <!-- <el-menu-item index="/tutorial">
         Tutorial

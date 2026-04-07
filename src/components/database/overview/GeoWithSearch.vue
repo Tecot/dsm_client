@@ -2,7 +2,7 @@
 <div class="bio-project-container">
   <div class="geo-container" v-show="geoData.length">
     <div class="geo-vis">
-      <GeoVis :geoData="geoData" :height="'440px'" :search="geoSearchData" :dataReset="dataReset"></GeoVis>
+      <GeoVis :geoData="geoData" :height="geoHeight" :search="geoSearchData" :dataReset="dataReset"></GeoVis>
     </div>
 
     <div class="tools-container">
@@ -38,6 +38,10 @@ export default {
       type: Array,
       required: true
     },
+    geoHeight: {
+      type: String,
+      default: '440px'
+    }
   },
 
   data() {

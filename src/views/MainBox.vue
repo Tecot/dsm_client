@@ -15,7 +15,7 @@
             <!-- <Footer></Footer> -->
         </el-container>
     </div>
-  </template>
+</template>
   
 <script>
 import NavBar from '@/components/mainbox/NavBar.vue'

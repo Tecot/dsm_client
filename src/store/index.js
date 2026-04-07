@@ -74,6 +74,7 @@ export default new Vuex.Store({
       {
         paths:[
           // 'geoData',
+          'ifShowedPrivacyPolicy',
           'databaseRunProjectData', 
           'contigDetailData'
         ]
