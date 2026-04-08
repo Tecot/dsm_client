@@ -110,10 +110,16 @@ export default {
       this.currentPage = 1
       this.pageSize = 20
       this.ifSearchedContigsProject = false
-      this.requestContigProjectInfo(this.srp, this.currentPage, this.pageSize)
+      if(!value) {
+        this.tableData = []
+        this.header = []
+        this.total = 0
+        return
+      } else {
+        this.requestContigProjectInfo(this.srp, this.currentPage, this.pageSize)
+      }
     },
     handleSearchData(value) {
-      console.log('search conditions: ', value)
       this.currentPage = 1
       this.pageSize = 20
       this.ifSearchedContigsProject = true

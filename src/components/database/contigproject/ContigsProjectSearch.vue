@@ -304,7 +304,7 @@ export default {
         withCredentials: false
       }).then((response) => {
         this.srps = response.data.data
-        this.srp = this.srps[0]
+        // this.srp = this.srps[0]
         this.$emit('outputSrp', this.srp)
         // this.$emit('outputSrp', 'SRP302406')
       })
