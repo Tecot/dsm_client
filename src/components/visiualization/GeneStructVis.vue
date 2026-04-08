@@ -1,14 +1,8 @@
 <template>
 	<div class="gene-struct-container">
-			<div class="tip">
-				<el-tag type="warning">
-					Tip: Please swipe left and right to view the complete gene structure diagram. 
-					Note: Some genes may overlap due to their similar positions and lengths.
-				</el-tag>
-			</div>
-			<div class="view-panel">
-				<div class="vis-container"></div>
-			</div>
+		<div class="view-panel">
+			<div class="vis-container"></div>
+		</div>
 		<div class="options-container" v-if="downloadvisible">
 		<el-button size="mini" type="primary" @click="downloadPNG">Download PNG</el-button>
 		<el-button size="mini" type="primary" @click="downloadSvg">Download SVG</el-button>
@@ -22,7 +16,7 @@ import * as d3 from 'd3'
 import { downloadImage2PNG, downloadImage2SVG, downloadImage2PDF } from '@/utils/downloadImage'
 
 export default {
-  name: 'GeneStructVis',
+ 	name: 'GeneStructVis',
 
 	props: {
 		inputData: {
@@ -87,7 +81,7 @@ export default {
   },
 
   mounted() {
-		
+	
   },
 
 	watch: {
@@ -387,11 +381,6 @@ export default {
 
 <style lang="scss" scoped>
 .gene-struct-container {
-	.tip {
-		height: 3rem;
-		display: flex;
-		align-items: center;
-	}
 	.view-panel {
 		display: flex;
 		justify-content: center;
@@ -401,10 +390,10 @@ export default {
 	}
 	
 	
-  .options-container {
-    display: flex;
-    justify-content: center;
-		margin-top: 20px;
-  }
+	.options-container {
+		display: flex;
+		justify-content: center;
+			margin-top: 20px;
+	}
 }
 </style>

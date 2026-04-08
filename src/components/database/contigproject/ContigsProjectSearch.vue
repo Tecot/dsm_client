@@ -219,8 +219,7 @@
               v-model="searchContent.lengthRange"
               :max="5000"
               :min="0"
-              :format-tooltip="(value) => value + ' bp' "
-            >
+              :format-tooltip="(value) => value + ' bp' ">
             </el-slider>
           </div>
         </div>
@@ -307,6 +306,7 @@ export default {
         this.srps = response.data.data
         this.srp = this.srps[0]
         this.$emit('outputSrp', this.srp)
+        // this.$emit('outputSrp', 'SRP302406')
       })
     },
 

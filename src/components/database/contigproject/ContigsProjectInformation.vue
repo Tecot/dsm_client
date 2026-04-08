@@ -113,6 +113,7 @@ export default {
       this.requestContigProjectInfo(this.srp, this.currentPage, this.pageSize)
     },
     handleSearchData(value) {
+      console.log('search conditions: ', value)
       this.currentPage = 1
       this.pageSize = 20
       this.ifSearchedContigsProject = true
@@ -217,7 +218,6 @@ export default {
             GC: value.gc,
             Length: value.length,
             Sequence: value.sequence,
-            // srp: this.srp
             srp: this.srp
           }
         }
